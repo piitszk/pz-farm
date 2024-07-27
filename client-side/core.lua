@@ -38,6 +38,8 @@ end)
 -- FARM:START
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("Farm:Start", function(Data)
+    if Route then return end
+
     Data = splitString(Data, "-")
 
     if Server.HasPermission(Farm[Data[1]]["Permission"]) then
@@ -46,7 +48,7 @@ RegisterNetEvent("Farm:Start", function(Data)
         local Zone = Data[2]
         Route = (Routes[Name] and Routes[Name][Zone]) and Routes[Name][Zone] or Routes["Default"][Zone]
 
-        if #Route == 0 then
+        if not Route or #Route == 0 then
             return TriggerEvent("Notify","Rota Indisponível", "Não há rotas disponíveis nessa zona.","amarelo",5000)
         end
 
