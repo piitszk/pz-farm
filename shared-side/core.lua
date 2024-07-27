@@ -1,6 +1,7 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VRP
 -----------------------------------------------------------------------------------------------------------------------------------------
+local Server = IsDuplicityVersion()
 local Tunnel = module("vrp", "lib/Tunnel")
 local Proxy = module("vrp", "lib/Proxy")
 vRPC = Tunnel.getInterface("vRP")
@@ -10,4 +11,8 @@ vRPS = Proxy.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
 Core = {}
 Tunnel.bindInterface(GetCurrentResourceName(), Core)
-_G[(IsDuplicityVersion()) and "Client" or "Server"] = Tunnel.getInterface(GetCurrentResourceName())
+_G[(Server) and "Client" or "Server"] = Tunnel.getInterface(GetCurrentResourceName())
+
+if Server then
+    -- Adapt your framework here
+end
